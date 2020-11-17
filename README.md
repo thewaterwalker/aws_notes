@@ -1,5 +1,24 @@
 # AWS Notes
 
+## S3
+- Buckets
+  - Bucket names have to be unique across the whole of S3 - globally unique
+  - Versioning and logging can be enabled on all buckets
+  - Once versioning is enabled, it can only be suspended and not disabled
+  - Tags can be added to all buckets, 10 max
+  - Encryption at rest (storage security) can be enabled for S3 buckets
+    - AWS managed keys are taken care of by AWS
+    - KMS managed keys are managed by the client
+  - Buckets can host static website files with DNS used to present a friendly URL
+  - Buckets can have a JSON based policy applied to them
+  - Folders are basically prefixes to the name and are syntactic sugar rather than actual folders
+    - Folders that are created are stored as objects so that you can navigate to them but they are just prefixes
+- S3 objects
+  - The minimum size of an object in S3 is zero bytes
+  - Lifecycle rules can be applied to S3 objects, limited by tags or prefixes if desired
+    - transition to infrequent-access or glacier after a set number of days
+  - S3 objects can be deleted upon which they are marked for deletion.  The can be recovered once deleted
+
 ## Instance Types
  - On Demand : available immediately and charged per minute of use.  Not much of a discount for using these
  - Reserved  : pay up front for a reserved instance for a period of 1 month to 36 months. Large discounts available
