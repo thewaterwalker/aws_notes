@@ -18,6 +18,73 @@
   - Lifecycle rules can be applied to S3 objects, limited by tags or prefixes if desired
     - transition to infrequent-access or glacier after a set number of days
   - S3 objects can be deleted upon which they are marked for deletion.  The can be recovered once deleted
+  - Cold objects can be migrated to Glacier automatically
+  - A Tape Gateway, part of the Storage Gateway, can be used to backup data to S3 and Glacier using existing tape processes
+- S3 Enhanced Features include
+  - Intelligent tiering implemented through Lifecycle rules.  This allows for automated transition to tiered storage and eventual expiration if needed
+  - Object locking to implement WORM (Write Once Read Many).  This is set up on the bucket when created and is permanent once enabled. When an object is uploaded into this bucket it can then be locked
+  - Batch operations are for batch management of the buckets with automated actions
+
+## Amazon Glacier
+- Archival of data that is not needed on a regular basis for pennies per GB per month
+- There are three access methods
+  - Expedited (3-5 minutes)
+  - Standard (3-5 hours)
+  - Bulk (5-12 hours)
+- S3 cold data can be moved into Glacier automatically
+- Snow devices can be used to import data into Glacier
+- Storage Gateways can be used to connect to Glacier for both access and archiving
+- Archives are the things that you store in Glacier.  They are known as objects in S3 but archives in Glacier
+- Vaults
+  - this is where the archives are stored and are referenced through an ARN (Amazon Resource Name)
+  - Vault Locks are for both securing the data and ensuring that Glacier is not used for regular data retrieval which can be expensive
+  - Event Notifications, through SNS, can be requested so that you know when someone accesses the Vault
+- Up to 5% can be retrieved from Glacier each month without cost
+- Retrieval limit rates can be set if required
+- A single AWS account can create up to 1000 Vaults per region
+- Only empty Vaults can be deleted
+- Multi-part upload is supported
+
+## Elastic Block Store (EBS)
+- Used for durable storage in EC2 instances
+- Cannot be shared across instances apart from volume recovery
+- Block level storage from one AWS service to another
+- Volume Types include
+  - Magnetic which were the original volume type.  They are the slowest and cheapest
+    - Standard
+    - Throughput optimised which is faster than standard
+    - Cold which is very large and very slow
+  - SSD General purpose
+  - SSD Provisioned IOPS (PIOPS) which gives you selectable IOPS from 100 to 32000
+- An EBS optimised EC2 instance should be used to take full advantage of an SSD
+- Snapshots can be used to take backups and recover from that backup as well as provision new volumes for new EC2 instances
+- Volume recovery means that a volume can be connected to another EC2 instance as a secondary volume
+
+## Elastic File System (EFS)
+- EFS is shareable and multiple EC2 instances can access a EFS share using NFSv4
+- EFS is not supported on Windows instances, only Linux instances can
+
+## Storage Comparison
+- Per Operation Latency
+  - EFS : low and consistent
+  - S3  : low for mixed request types and for integration with CloudFront
+  - EBS : lowest and consistent
+- Throughput scale (how fast can the throughput scale up)
+  - EFS : multiple GBs per second
+  - S3  : multiple GBs per second
+  - EBS : single GBs per second but note that we do not normally access very large files through EBS
+- Data Availabililty and Durability
+  - EFS : stored redundantly across multiple AZs
+  - S3  : stored redundantly across multiple AZs
+  - EBS : stored redundantly in a single AZ
+- Access
+  - EFS : one to thousands of EC2 instances from multiple AZs concurrently
+  - S3  : one to millions of connections over the web
+  - EBS : single EC2 instance in a single AZ
+- Use Cases
+  - EFS : will work for most use cases for shared drives
+  - S3  : content, media, backups and data lakes
+  - EBS : boot volumes, databases, data warehouses and ETL
 
 ## Instance Types
  - On Demand : available immediately and charged per minute of use.  Not much of a discount for using these
