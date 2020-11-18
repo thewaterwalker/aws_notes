@@ -62,7 +62,29 @@
 
 ## Elastic File System (EFS)
 - EFS is shareable and multiple EC2 instances can access a EFS share using NFSv4
-- EFS is not supported on Windows instances, only Linux instances can
+- EFS is not supported on Windows instances, only Linux instances can access them
+- EFS File Systems are normally launched into a VPC and can be mounted into separate AZs
+- Throughput can be set to Bursting or Provisioned
+- The EFS can be encrypted if required
+- On Linux EC2 instances the EFS is mounted as an NFS mount
+- Through the VPC an endpoint, powered by PrivateLink, can be created to share EFS through an ENI
+  - this will set up a chargeable public IP address for the endpoint to which clients can connect
+
+## Amazon FSx
+- This is a simple and fully managed file system for the cloud
+- You can choose between a Windows File Server and a Lustre high-performance file system
+- It implements SMB so has native compatibility with Windows services
+- Minimum size is 32GB and maximum size is 65536GB
+
+## AWS Storage Gateway
+- a software appliance (VM) that provides three types of storage solutions
+  - file gateway to put files into S3
+  - volume gateway using iSCSI to access storage volumes in AWS
+    - cached stores the volume in AWS with a cache in the storage gateway
+    - stored will store the volume in the storage gateway and save periodic backups to AWS
+  - tape gateway 
+- The storage gateway can be installed on-premise to give your private network access to AWS storage
+- The storage gateway can be installed on an EC2 instance to share storage across VPCs
 
 ## Storage Comparison
 - Per Operation Latency
@@ -73,7 +95,7 @@
   - EFS : multiple GBs per second
   - S3  : multiple GBs per second
   - EBS : single GBs per second but note that we do not normally access very large files through EBS
-- Data Availabililty and Durability
+- Data Availability and Durability
   - EFS : stored redundantly across multiple AZs
   - S3  : stored redundantly across multiple AZs
   - EBS : stored redundantly in a single AZ
@@ -120,16 +142,20 @@ ssh -i mykeypair.pem ec2-user@ip.address.of.instance
  - *within* an instance it is available at http://169.254.169.254/latest/user-data (trailing / is not needed)
 
 ## IP Addresses
- - private ip addresses are not charged for and are used in both public and private subnets. Private IP addresses are retained when the instance is stopped. They are known to the OS
- - public ip addresses are *dynamic* ip addresses. They are not charged for and are lost when the EC2 instance is stopped.  They are associated with a private ip address on the EC2 instance
- - elastic ip addresses are *static* public ip addresses. You are charged if they are not used. They are associated with a private ip address on the EC2 instance or elastic network interfaces
- - Public and elastic IP addresses are not known to the OS and are associated with the EC2 instance private IP outside the OS
-   - the mapping to the private ip address from the public ip address is a NAT operation that is performed by the Internet Gateway 
+- private ip addresses are not charged for and are used in both public and private subnets. Private IP addresses are retained when the instance is stopped. They are known to the OS
+- public ip addresses are *dynamic* ip addresses. They are not charged for and are lost when the EC2 instance is stopped.  They are associated with a private ip address on the EC2 instance
+- elastic ip addresses are *static* public ip addresses. You are charged if they are not used. They are associated with a private ip address on the EC2 instance or elastic network interfaces
+- Public and elastic IP addresses are not known to the OS and are associated with the EC2 instance private IP outside the OS
+  - the mapping to the private ip address from the public ip address is a NAT operation that is performed by the Internet Gateway 
 
 ## VPC
- - A VPC (virtual private cloud) is a virtual network for your AWS account
- - The IP range is separated from other VPCs in AWS
- - A VPC can span multiple Availability Zones
+- A VPC (virtual private cloud) is a virtual network for your AWS account
+- The IP range is separated from other VPCs in AWS
+- A VPC can span multiple Availability Zones and has a number of subnets, public or private
+- DirectConnect can be used to connect between VPCs or between on-premises network and a VPC with a VPN
+- VPC peering can also be used to connect VPCs
+- VPC endpoints can be created to allow access to resources controlled by policies
+- Amazon recommends not deleting the default VPC that is created for you
 
 ## Subnet
  - A subnet is a range of IP Addresses in your VPC
