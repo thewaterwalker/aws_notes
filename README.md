@@ -108,9 +108,21 @@
   - S3  : content, media, backups and data lakes
   - EBS : boot volumes, databases, data warehouses and ETL
 
-## Instance Types
+## EC2 Instance Types
+- General Purpose are T2, M3, M4, M5
+  - T2 provides burst capability through credits accrued during quiet periods
+  - M3, M4, M5 do not have any burst capability
+- Compute Optimised are C3/4/5
+- Memory Optimised are X1e, X1, R4 and R3
+- Storage Optimised H1, I3 and D2
+  - note that you can also choose memory optimised and implement the storage type that you need
+- Advanced Computing are P3, P2, G3 and F1
+  - these include GPUs and FPGAs
+
+## EC2 Pricing Categories
 - On Demand : available immediately and charged per minute of use.  Not much of a discount for using these
 - Reserved  : pay up front for a reserved instance for a period of 1 month to 36 months. Large discounts available
+  - includes no, partial and full up front costs which are most expensive to cheapest respectively
 - Spot      : available at a reduced rate if there is spare capacity in EC2. May be shutdown if another person is willing to pay more
 - Dedicated : not multi-tenanted.  Dedicated to you
 - Scheduled : reserve instances on a recurring schedule for compute capacity when you know you will need it
