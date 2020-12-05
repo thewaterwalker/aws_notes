@@ -155,15 +155,20 @@
 ## Security Groups
 - security groups are stateful EC2 instance level firewalls
 - they define protocols inbound from ip sources, such as 0.0.0.0/0
-- there can be multiple security groups for each ec2 instance
+- supports allow rules only; deny rules are implicit so only allow rules need to be defined
+- there can be up to five security groups for each ec2 instance
 - security groups have outbound rules as well, but 'return' traffic is always permitted so the outbound rule may not be needed; i.e. they are stateful
 - security groups to not apply to subnets
-- deny rules are implicit so only allow rules need to be defined
+- all rules are evaluated before a decision is made to allow or deny traffic
+- security groups must be applied to EC2 instances
+- by default security groups are only bound to the primary network interface
 
 ## Network Access Control List (NACL)
 - NACLs are stateless subnet level firewalls
 - supports both allow and deny rules
 - rule precedence applies and the first rule that matches is applied, either allow or deny
+- rules are processed in order and processing stops as soon as a allow or deny rules matches
+- NACL rulesa apply to all EC2 instances inside a subnet
 
 ## SSH connection
 - you must download the store the private key as a PEM and change its permissions to 400
