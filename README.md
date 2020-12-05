@@ -108,6 +108,24 @@
   - S3  : content, media, backups and data lakes
   - EBS : boot volumes, databases, data warehouses and ETL
 
+## AMIs (Amazon Machine Images)
+- the term instance indicates the use of an AMI
+- generatd AMIs are
+  - implicit (default) which means that only the owner can use them
+  - explicit means that named users can use it
+  - public means that anyone can use it
+- virutalisation types are 
+  - HVM hardware virtual machines where the virtualisation is supported in hardware VT-x (Intel) or AMD-V (AMD)
+  - para virtual machines are not hardware assisted
+- instance root volume contains the boot sector
+  - instance store backed AMI means that the root volume is stored in S3 buckets
+    - no support for the stop action, you're always terminating
+    - data in the instance store is lost on failure
+    - EBS volumes are preserved though
+  - EBS backed AMI means that the root volume is stored in an EBS volume
+    - supports the stop action
+    - data is not lost during failure
+
 ## EC2 Instance Types
 - General Purpose are T2, M3, M4, M5
   - T2 provides burst capability through credits accrued during quiet periods
@@ -118,6 +136,12 @@
   - note that you can also choose memory optimised and implement the storage type that you need
 - Advanced Computing are P3, P2, G3 and F1
   - these include GPUs and FPGAs
+- Dedicated Instances
+  - an EC2 instance that runs on hardware that is dedicated to a single customer
+  - may share hardware with other EC2 instances from the same AWS account that are not dedicated
+- Dedicated Hosts
+  - used to launch EC2 instances on physical servers that are dedicated for your use
+  - allow you to use existing software licences that are on that physical server
 
 ## EC2 Pricing Categories
 - On Demand : available immediately and charged per minute of use.  Not much of a discount for using these
