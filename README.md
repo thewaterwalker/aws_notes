@@ -273,3 +273,26 @@ ssh -i mykeypair.pem ec2-user@ip.address.of.instance
   - VPN CloudHub
   - Software VPN using protocols that AWS supports such as L2TP (Layer 2 Tunneling Protocol) with IPSec
   
+## Identity and Access Management (IAM)
+- Resources are the things on which actions can be taken, e.g. EC2 instances
+- Principals are the things that can take actions, and include
+  - Users
+  - Groups
+  - Roles
+- Principals are also called identities
+- IAM users are entities created in AWS
+  - Can be a person or a service
+  - They have credentials which consist of a username, password or up to two access keys
+- Policies, based on JSON, define what can be done
+  - Identity based policies are given to users
+  - Group based policies are attached to groups and are preferred to identity based policies
+  - Resource based policies are given to resources and state that only defined users (across accounts?) can take action on those resources
+- Policies define the actions that can be taken
+- A Role is an identity that is granted permissions, but not permanently assigned to a user
+- AWS root user has unlimited access and is not recommended for everyday use
+- Policy processing
+  - be default all requests are denied
+  - explicit allow overrides the default
+  - permission boundaries can override explicit allows
+  - explicit denies override explicit allows, for example a deny in one group will override an allow in another group
+- Permission boundaries will limit the scope of any permissions but do not define specific permissions
