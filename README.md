@@ -290,9 +290,18 @@ ssh -i mykeypair.pem ec2-user@ip.address.of.instance
 - Policies define the actions that can be taken
 - A Role is an identity that is granted permissions, but not permanently assigned to a user
 - AWS root user has unlimited access and is not recommended for everyday use
+  - root user access is required for changin billing information or for closing your account
+  - other admin access can be granted to a specific user by putting them in an admin group or adding admin permissions for them
+  - for admin access permission boundaries can be set that limit the maximum access that an admin user will have
+  - the login link for an IAM user will include the account id in the URL and must be used to login e.g. https://123456789012.signin.amazon.com/console
+  - access keys can be created for this account, SSH public keys can be uploaded and HTTPS git credentials for AWS CodeCommit can be created as well
 - Policy processing
   - be default all requests are denied
   - explicit allow overrides the default
   - permission boundaries can override explicit allows
   - explicit denies override explicit allows, for example a deny in one group will override an allow in another group
 - Permission boundaries will limit the scope of any permissions but do not define specific permissions
+- The principle of least privilege means that the minumum amount of permission should be given to users
+- Role creation is used to give services such as EC2, CLIs and programs access to other services or accounts
+- CloudTrail can be used to log events and generate alerts based on those events
+  - by default the event history is stored for 90 days and then deleted unless you create a trail
