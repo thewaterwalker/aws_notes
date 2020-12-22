@@ -249,10 +249,26 @@ ssh -i mykeypair.pem ec2-user@ip.address.of.instance
 ## ELB 
 - Elastic Load Balancer that distributes incoming traffic to resources across multiple availability zones in a region
 - Maintains a public IP so that your resources do not have to
-- Application ELB
+- THere are three types of ELB, Classic Load Balancer, Network Load Balancer and Application Load Balancer
+- Classic Load Balancer
+  - this is the oldest type and is no longer recommended
+- Application Load Balancer
   - best suited for HTTP and HTTPS loads
+  - OSI Layer 7 
 - Network Load Balancer
-- best suited for TCP/UDP/TLS where extreme performance is required
+  - best suited for TCP/UDP/TLS where extreme performance is required
+  - OSI Layer 4
+- Load balacing algorithms include
+  - round robin
+  - randomized
+  - centrally managed
+  - threshold based
+- Load balancing can be used with 
+  - EC2
+  - ECS
+  - Auto Scaling
+  - CloudWatch
+  - Route 53
 
 ## NATs
 - used to allow private instances access to the internet
@@ -305,3 +321,15 @@ ssh -i mykeypair.pem ec2-user@ip.address.of.instance
 - Role creation is used to give services such as EC2, CLIs and programs access to other services or accounts
 - CloudTrail can be used to log events and generate alerts based on those events
   - by default the event history is stored for 90 days and then deleted unless you create a trail
+
+## Auto Scaling Groups
+- ASGs can span multiple AZs
+- ASGs will first terminate those instances that have the oldest configuration or those that are about to hit the next billing hour
+- There are four basic methods that can be used to launch auto scaling groups
+  - using a Launch Template
+    - the launch template includes all the parameters needed to launch EC2 instances
+    - the IAM role using the launch template must have the ec2:RunInstances policy
+  - using a Launch Configuration for ASGs
+  - using an EC2 instance
+    - effectively create an AMI for an EC2 instance
+  - using the Amazon EC2 launch wizard
