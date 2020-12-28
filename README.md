@@ -168,7 +168,8 @@
 - supports both allow and deny rules
 - rule precedence applies and the first rule that matches is applied, either allow or deny
 - rules are processed in order and processing stops as soon as a allow or deny rules matches
-- NACL rulesa apply to all EC2 instances inside a subnet
+- the default rule number is *
+- NACL rules apply to all EC2 instances inside a subnet
 
 ## SSH connection
 - you must download the store the private key as a PEM and change its permissions to 400
@@ -333,3 +334,28 @@ ssh -i mykeypair.pem ec2-user@ip.address.of.instance
   - using an EC2 instance
     - effectively create an AMI for an EC2 instance
   - using the Amazon EC2 launch wizard
+
+## DNS
+- DNS Record types
+  - A records are for IPv4
+  - AAAA records are for IPv6
+  - NS records resolve the name server for a given domain
+  - MX records resolve the mail server for a given domain
+  - CNAME records are aliases for the canonical names
+
+## Route 53
+- DNS management 
+  - hosted zones can be public or private
+    - private zones allow you to create a a domain for your VPC only
+  Routing policies
+    - simple is a direct translation of the domain name
+    - weighted deals with multiple IP addresses and directs traffic to those based on user defined weights (e.g. 80% to a certain IP and 20% to the rest)
+    - latency will pick the IP address with the lowest latency for that user
+    - failover means use one and then failover if the first instance fails
+    - geolocation directs users to the nearest host that will perform the best
+    - nultivalue answer sets up a number of health checks and picks the one that passes the most
+
+## Flow Logs
+- also known as netflows
+- can be written to an S3 bucket
+- useful for monitoring and intrusion detection systems
