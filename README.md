@@ -401,3 +401,53 @@ _ Simple Notification Service (SNS)
   - defines the sequence of events required to achieve an outcome
   - used in decoupled applications
   - operates in a logical domain to constrain its activities
+  - soon to be replaced by Step Functions
+- Step Functions
+  - this is recommended over SWF
+  - they use state machines
+  - they can include nested Step Functions
+- OpsWorks
+  - define configuration management 
+  - Configure
+    - instance deployment
+    - service deployment
+    - application deployment
+  - Operate
+    - application updates
+    - infrastructure updates
+  - OpsWorks includes the following
+    - OpsWork stacks
+      - initial version that consists of a series of layers that can be combined into a stack
+    - OpsWork Chef Automate
+      - cookbooks with recipes
+    - OpsWork Puppet
+      - deployment of a master server with modules
+- Cognito
+  - single sign-on and SSO
+  - Google, FB, Amazon and AD/SAML auth services
+  - profile management
+- Elastic Map Reduce (EMR)
+  - Map reduce for job processing
+  - Master node will distribute to Core or Task Nodes
+    - Core nodes include processing and storage capabilities
+    - Task nodes include processing capabilities only
+- CloudFormation
+  - CloudFormation can deploy entire solutions automatically
+  - CloudFormer is a drag and drop deployment creation tool
+  - New properties get added over time
+- CloudWatch
+  - monitors cloud and on-premises solutions
+  - based on the monitoring of logs
+  - you can create a dashboard for your needs
+  - can generate an event and trigger alarms if needed
+- TrustedAdvisor
+  - dashboard for alerting issues with resources and accounts in areas of
+    - cost optimisation
+    - performance
+    - security
+    - fault tolerance
+    - service limits
+
+## AWS Organisations
+- Allows an organisation to manage multiple accounts
+- can add policies at the OU level rather than within the role level
