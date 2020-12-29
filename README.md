@@ -359,3 +359,45 @@ ssh -i mykeypair.pem ec2-user@ip.address.of.instance
 - also known as netflows
 - can be written to an S3 bucket
 - useful for monitoring and intrusion detection systems
+
+## Kinesis
+- Kinesis isued for the processing of data streams
+- It provides realtime analytics and can enable the use of micro service applications
+- Kinesis modes include
+  - Kinesis Data Streams
+    - ingests and *stores* data streams for processing by Kinesis Data Analytics, EMR, EC2 etc
+  - Kinesis Data Firehouse
+    - prepare and *stream* data continuously straight to whatever can process it
+  - Kinesis Data Analytics
+    - used to analyse realtime data streams
+  - Kinesis Video Streams
+
+## Other Services
+- CloudFront
+  - provides a CDN for content acceleration and customisation using edge caches and edge servers
+  - can serve html assets from S3
+  - geo-restrictions or fencing can be implemented
+  - AWS Global accelerator works with TCP and UDP traffic with static IP addresses
+- Web Application Firewall
+  - this is a component that can be configured to control access to HTTP or HTTPS requests
+  - it can work with CloudFront or a public ELB
+  - it can be deny by default or allow by default
+  - it will reply with a HTTP 403 or other configurable default behaviour
+  - Shield is a new subset that has some free tier options to protect against DDoS attacks
+- Simple Queue Service (SQS)
+  - used to decouple applications via asynchrous messaging 
+  - they can include up to 256Kb of data
+  - queue types include
+    - standard that does not guarantee message order
+    - FIFO that does guarantee order but at a lower rate
+_ Simple Notification Service (SNS)
+  - used the pub sub model to send messages to clients
+  - publishers push messages to topics which are then broadcast
+  - subscribers receive messages when they subscribe to topics
+  - SNS stores across multiple AZs
+  - message delivery can be through HTTP/S, email, SMS, Lambda and SNS
+  - messages are limited to 256Kb or 140 bytes over SMS up to a maximum of 1600 bytes
+- Simple Workflow (SWF)
+  - defines the sequence of events required to achieve an outcome
+  - used in decoupled applications
+  - operates in a logical domain to constrain its activities
