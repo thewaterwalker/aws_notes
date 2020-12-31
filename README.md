@@ -484,7 +484,7 @@ ssh -i mykeypair.pem ec2-user@ip.address.of.instance
 ## CloudFormation
 
 - CloudFormation can deploy entire solutions automatically
-- CloudFormer is a drag and drop deployment creation tool
+- CloudFormation Designer is a drag and drop deployment creation tool
 - New properties get added over time
 
 ## CloudWatch
@@ -510,7 +510,50 @@ ssh -i mykeypair.pem ec2-user@ip.address.of.instance
 
 ## AWS Relational Databse Services (RDS)
 
-- managed databases instances
+- managed database instances
 - scaling is done through
   - read replicas
   - manual scaling through scripts
+- RDS databases support at rest encryption which must be enabled at creation time (or manually at recovery time)
+
+## Amazon Aurora
+
+- relational database optimised for OLTP
+- MySQL compatible and PostgreSQL compatible as well
+- starts at 10Gb and grows at 10Gb increments up to 64Tb
+- maximum of 32 CPUs and 244GiB of RAM
+- there are two copies in each AZ and a minimum of 3 AZs
+  - so there are a minimum of 6 copies of the databas
+- you can lose two copies and still continue to write
+- you can lose three copies and stil continue to read
+- supports up to 15 aurora replicas (9 more than the default) with automatic failover
+- supports up to 5 MySQL read replicas with no automatic failover
+
+## Amazon Redshift
+
+- columnar OLAP database warehouse for fast read operations
+- can be implemented in single node or multi-mode
+- single node can store up to 160Gb of data
+- multiple node consists of
+  - leader node for connections and queries
+  - compute node to store the data and execute queries and calculations
+- operates in one AZ but snapshots can be restored to another AZ
+
+## DynamoDB
+
+- key/value NoSQL database
+- millisecond latency at any scale
+- uses SSDs only
+- two consistency types
+  - eventual consist reads
+  - strongly consist reads
+- storage is $0.25 per month
+- throughput charges are
+  - write is billed per hour for every 10 unit increments rounded up
+  - read is billed per hour for every 50 unit increments rounded up
+  - one unit is one write per second
+- as a user you create tables and not databases
+
+## Useful Links
+
+AWS Quickstarts : <https://aws.amazon.com/quickstarts>
