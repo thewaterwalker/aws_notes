@@ -372,82 +372,98 @@ ssh -i mykeypair.pem ec2-user@ip.address.of.instance
     - used to analyse realtime data streams
   - Kinesis Video Streams
 
-## Other Services
-- CloudFront
-  - provides a CDN for content acceleration and customisation using edge caches and edge servers
-  - can serve html assets from S3
-  - geo-restrictions or fencing can be implemented
-  - AWS Global accelerator works with TCP and UDP traffic with static IP addresses
-- Web Application Firewall
-  - this is a component that can be configured to control access to HTTP or HTTPS requests
-  - it can work with CloudFront or a public ELB
-  - it can be deny by default or allow by default
-  - it will reply with a HTTP 403 or other configurable default behaviour
-  - Shield is a new subset that has some free tier options to protect against DDoS attacks
-- Simple Queue Service (SQS)
-  - used to decouple applications via asynchrous messaging 
-  - they can include up to 256Kb of data
-  - queue types include
-    - standard that does not guarantee message order
-    - FIFO that does guarantee order but at a lower rate
-_ Simple Notification Service (SNS)
-  - used the pub sub model to send messages to clients
-  - publishers push messages to topics which are then broadcast
-  - subscribers receive messages when they subscribe to topics
-  - SNS stores across multiple AZs
-  - message delivery can be through HTTP/S, email, SMS, Lambda and SNS
-  - messages are limited to 256Kb or 140 bytes over SMS up to a maximum of 1600 bytes
-- Simple Workflow (SWF)
-  - defines the sequence of events required to achieve an outcome
-  - used in decoupled applications
-  - operates in a logical domain to constrain its activities
-  - soon to be replaced by Step Functions
-- Step Functions
-  - this is recommended over SWF
-  - they use state machines
-  - they can include nested Step Functions
-- OpsWorks
-  - define configuration management 
-  - Configure
-    - instance deployment
-    - service deployment
-    - application deployment
-  - Operate
-    - application updates
-    - infrastructure updates
-  - OpsWorks includes the following
-    - OpsWork stacks
-      - initial version that consists of a series of layers that can be combined into a stack
-    - OpsWork Chef Automate
-      - cookbooks with recipes
-    - OpsWork Puppet
-      - deployment of a master server with modules
-- Cognito
-  - single sign-on and SSO
-  - Google, FB, Amazon and AD/SAML auth services
-  - profile management
-- Elastic Map Reduce (EMR)
-  - Map reduce for job processing
-  - Master node will distribute to Core or Task Nodes
-    - Core nodes include processing and storage capabilities
-    - Task nodes include processing capabilities only
-- CloudFormation
-  - CloudFormation can deploy entire solutions automatically
-  - CloudFormer is a drag and drop deployment creation tool
-  - New properties get added over time
-- CloudWatch
-  - monitors cloud and on-premises solutions
-  - based on the monitoring of logs
-  - you can create a dashboard for your needs
-  - can generate an event and trigger alarms if needed
-- TrustedAdvisor
-  - dashboard for alerting issues with resources and accounts in areas of
-    - cost optimisation
-    - performance
-    - security
-    - fault tolerance
-    - service limits
+## CloudFront
+- provides a CDN for content acceleration and customisation using edge caches and edge servers
+- can serve html assets from S3
+- geo-restrictions or fencing can be implemented
+- AWS Global accelerator works with TCP and UDP traffic with static IP addresses
+
+## Web Application Firewall
+- this is a component that can be configured to control access to HTTP or HTTPS requests
+- it can work with CloudFront or a public ELB
+- it can be deny by default or allow by default
+- it will reply with a HTTP 403 or other configurable default behaviour
+- Shield is a new subset that has some free tier options to protect against DDoS attacks
+
+## Simple Queue Service (SQS)
+- used to decouple applications via asynchrous messaging 
+- they can include up to 256Kb of data
+- queue types include
+  - standard that does not guarantee message order
+  - FIFO that does guarantee order but at a lower rate
+
+## Simple Notification Service (SNS)
+- used the pub sub model to send messages to clients
+- publishers push messages to topics which are then broadcast
+- subscribers receive messages when they subscribe to topics
+- SNS stores across multiple AZs
+- message delivery can be through HTTP/S, email, SMS, Lambda and SNS
+- messages are limited to 256Kb or 140 bytes over SMS up to a maximum of 1600 bytes
+
+## Simple Workflow (SWF)
+- defines the sequence of events required to achieve an outcome
+- used in decoupled applications
+- operates in a logical domain to constrain its activities
+- soon to be replaced by Step Functions
+
+## Step Functions
+- this is recommended over SWF
+- they use state machines
+- they can include nested Step Functions
+
+## OpsWorks
+- define configuration management 
+- Configure
+  - instance deployment
+  - service deployment
+  - application deployment
+- Operate
+  - application updates
+  - infrastructure updates
+- OpsWorks includes the following
+  - OpsWork stacks
+    - initial version that consists of a series of layers that can be combined into a stack
+  - OpsWork Chef Automate
+    - cookbooks with recipes
+  - OpsWork Puppet
+    - deployment of a master server with modules
+
+## Cognito
+- single sign-on and SSO
+- Google, FB, Amazon and AD/SAML auth services
+- profile management
+
+## Elastic Map Reduce (EMR)
+- Map reduce for job processing
+- Master node will distribute to Core or Task Nodes
+  - Core nodes include processing and storage capabilities
+  - Task nodes include processing capabilities only
+
+## CloudFormation
+- CloudFormation can deploy entire solutions automatically
+- CloudFormer is a drag and drop deployment creation tool
+- New properties get added over time
+
+## CloudWatch
+- monitors cloud and on-premises solutions
+- based on the monitoring of logs
+- you can create a dashboard for your needs
+- can generate an event and trigger alarms if needed
+
+## TrustedAdvisor
+- dashboard for alerting issues with resources and accounts in areas of
+  - cost optimisation
+  - performance
+  - security
+  - fault tolerance
+  - service limits
 
 ## AWS Organisations
-- Allows an organisation to manage multiple accounts
+- allows an organisation to manage multiple accounts
 - can add policies at the OU level rather than within the role level
+
+## AWS Relational Databse Services (RDS)
+- managed databases instances
+- scaling is done through
+  - read replicas
+  - manual scaling through scripts
